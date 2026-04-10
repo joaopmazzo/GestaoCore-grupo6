@@ -1,0 +1,1 @@
+# Gest-oCore-grupo6

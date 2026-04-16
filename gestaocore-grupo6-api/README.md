@@ -37,7 +37,9 @@
 
 ## Estrutura das Controllers
 
-### - LoginController
+<details>
+<summary><h3>LoginController</h3></summary>
+
 #####  POST /login
 Autentica um usuário e retorna um token JWT.
 
@@ -66,9 +68,13 @@ Autentica um usuário e retorna um token JWT.
 | accessToken | String | Token JWT para autenticação em requisições futuras |
 | expiresIn   | String | Data/hora de expiração do token                    |
 
+</details>
+
 ---
 
-### - UsuarioController
+<details>
+<summary><h3>UsuarioController</h3></summary>
+
 #####  GET /usuario
 Retorna a lista de todos os usuários cadastrados.
 
@@ -215,6 +221,154 @@ Remove um usuário do sistema.
 | id        | UUID | Sim         | ID do usuário a deletar |
 
 **Response Body**: Sucesso (204 No Content)
+
+</details>
+
+---
+
+<details>
+<summary><h3>ClienteController</h3></summary>
+
+#####  GET /cliente
+Retorna a lista de todos os clientes cadastrados.
+
+**Response Body**: Sucesso (200 OK)
+```json
+[
+  {
+    "id": "uuid",
+    "nome": "string",
+    "email": "string",
+    "telefone": "string",
+    "rua": "string",
+    "numero": "string",
+    "cidade": "string",
+    "estado": "string",
+    "cep": "string",
+    "complemento": "string"
+  }
+]
+```
+
+---
+
+#####  GET /cliente/{id}
+Retorna os dados de um cliente específico por ID.
+
+**Path Parameters**:
+
+| Parâmetro | Tipo | Obrigatório | Descrição             |
+|-----------|------|-------------|-----------------------|
+| id        | UUID | Sim         | ID do cliente buscado |
+
+**Response Body**: Sucesso (200 OK)
+```json
+{
+    "id": "uuid",
+    "nome": "string",
+    "email": "string",
+    "telefone": "string",
+    "rua": "string",
+    "numero": "string",
+    "cidade": "string",
+    "estado": "string",
+    "cep": "string",
+    "complemento": "string"
+}
+```
+
+---
+
+#####  POST /cliente
+Cadastra um novo cliente no sistema.
+
+**Request Body**:
+```json
+{
+    "nome": "string",       // obrigatorio
+    "email": "string",      // obrigatorio
+    "telefone": "string",   // obrigatorio
+    "rua": "string",        // obrigatorio
+    "numero": "string",     // obrigatorio
+    "cidade": "string",     // obrigatorio
+    "estado": "string",     // obrigatorio
+    "cep": "string",        // obrigatorio
+    "complemento": "string" // obrigatorio
+}
+```
+
+**Response Body**: Sucesso (201 Created)
+```json
+{
+  "id": "uuid",
+  "nome": "string",
+  "email": "string",
+  "telefone": "string",
+  "rua": "string",
+  "numero": "string",
+  "cidade": "string",
+  "estado": "string",
+  "cep": "string",
+  "complemento": "string"
+}
+```
+
+---
+
+#####  PUT /cliente/{id}
+Atualiza os dados de um cliente existente.
+
+**Path Parameters**:
+
+| Parâmetro | Tipo | Obrigatório | Descrição                 |
+|-----------|------|-------------|---------------------------|
+| id        | UUID | Sim         | ID do usuário a atualizar |
+
+**Request Body**:
+```json
+{
+  "nome": "string",
+  "email": "string",
+  "telefone": "string",
+  "rua": "string",
+  "numero": "string",
+  "cidade": "string",
+  "estado": "string",
+  "cep": "string",
+  "complemento": "string"
+}
+```
+
+**Response Body**: Sucesso (200 OK)
+```json
+{
+  "id": "uuid",
+  "nome": "string",
+  "email": "string",
+  "telefone": "string",
+  "rua": "string",
+  "numero": "string",
+  "cidade": "string",
+  "estado": "string",
+  "cep": "string",
+  "complemento": "string"
+}
+```
+
+---
+
+#####  DELETE /cliente/{id}
+Remove um cliente do sistema.
+
+**Path Parameters**:
+
+| Parâmetro | Tipo | Obrigatório | Descrição               |
+|-----------|------|-------------|-------------------------|
+| id        | UUID | Sim         | ID do usuário a deletar |
+
+**Response Body**: Sucesso (204 No Content)
+
+</details>
 
 ---
 

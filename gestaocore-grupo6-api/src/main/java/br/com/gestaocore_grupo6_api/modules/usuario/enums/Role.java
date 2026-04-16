@@ -1,4 +1,4 @@
-package br.com.gestaocore_grupo6_api.enums;
+package br.com.gestaocore_grupo6_api.modules.usuario.enums;
 
 import org.springframework.security.core.GrantedAuthority;
 

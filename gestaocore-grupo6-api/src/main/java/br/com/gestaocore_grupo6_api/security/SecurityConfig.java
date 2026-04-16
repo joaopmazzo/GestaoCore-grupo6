@@ -30,12 +30,12 @@ public class SecurityConfig {
     };
 
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+    SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) {
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth ->
                     auth
-                            .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                            .requestMatchers(HttpMethod.POST, "/usuario/login").permitAll()
                             .requestMatchers(PERMIT_ALL_LIST).permitAll()
                             .anyRequest().authenticated()
                 )
@@ -49,9 +49,7 @@ public class SecurityConfig {
 
     @Bean
     public AccessDeniedHandler customAccessDeniedHandler() {
-        return (request, response, accessDeniedException) -> {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        };
+        return (request, response, accessDeniedException) -> response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
     }
 
     @Bean

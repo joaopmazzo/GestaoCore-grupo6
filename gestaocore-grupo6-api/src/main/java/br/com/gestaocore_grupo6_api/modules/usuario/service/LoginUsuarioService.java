@@ -1,12 +1,12 @@
-package br.com.gestaocore_grupo6_api.security;
+package br.com.gestaocore_grupo6_api.modules.usuario.service;
 
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
-import br.com.gestaocore_grupo6_api.dto.request.UsuarioLoginRequestDTO;
-import br.com.gestaocore_grupo6_api.repository.UsuarioRepository;
+import br.com.gestaocore_grupo6_api.modules.usuario.dto.UsuarioLoginRequestDTO;
+import br.com.gestaocore_grupo6_api.modules.usuario.repository.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 
-import br.com.gestaocore_grupo6_api.dto.response.UsuarioLoginResponseDTO;
-import br.com.gestaocore_grupo6_api.entity.Usuario;
+import br.com.gestaocore_grupo6_api.modules.usuario.dto.UsuarioLoginResponseDTO;
+import br.com.gestaocore_grupo6_api.modules.usuario.entity.UsuarioEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -23,7 +23,7 @@ import javax.naming.AuthenticationException;
 
 @Service
 @RequiredArgsConstructor
-public class AuthenticationService {
+public class LoginUsuarioService {
 
   private final UsuarioRepository usuarioRepository;
   private final PasswordEncoder passwordEncoder;
@@ -35,20 +35,20 @@ public class AuthenticationService {
   private Long tokenExpiration;
 
   public UsuarioLoginResponseDTO autenticar(UsuarioLoginRequestDTO dto) throws AuthenticationException {
-    Usuario usuario = usuarioRepository
+    UsuarioEntity usuarioEntity = usuarioRepository
             .findByEmail(dto.email())
             .orElseThrow(() -> new EntityNotFoundException("Email/Senha incorreta"));
 
-    if (!passwordEncoder.matches(dto.senha(), usuario.getSenha())) {
-      throw new AuthenticationException();
+    if (!passwordEncoder.matches(dto.senha(), usuarioEntity.getSenha())) {
+      throw new AuthenticationException("Email/Senha incorreta");
     }
 
     Algorithm algorithm = Algorithm.HMAC256(secretKey);
     Instant expirationTime = Instant.now().plusMillis(tokenExpiration);
 
     String token = JWT.create()
-        .withSubject(usuario.getId().toString())
-        .withClaim("role", usuario.getRole().name())
+        .withSubject(usuarioEntity.getId().toString())
+        .withClaim("role", usuarioEntity.getRole().name())
         .withExpiresAt(Date.from(expirationTime))
         .sign(algorithm);
 

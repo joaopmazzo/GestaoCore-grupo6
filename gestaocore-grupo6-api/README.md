@@ -66,11 +66,155 @@ Autentica um usuário e retorna um token JWT.
 | accessToken | String | Token JWT para autenticação em requisições futuras |
 | expiresIn   | String | Data/hora de expiração do token                    |
 
-**Response Body**: Erro (400 Bad Request)
+---
+
+### - UsuarioController
+#####  GET /usuario
+Retorna a lista de todos os usuários cadastrados.
+
+**Response Body**: Sucesso (200 OK)
 ```json
-"string"
+[
+  {
+    "id": "uuid",
+    "nome": "string",
+    "email": "string",
+    "role": "string"
+  }
+]
 ```
-Retorna uma mensagem de erro descrevendo o problema ocorrido durante a autenticação (credenciais inválidas, usuário não encontrado, etc.)
+
+| Campo | Tipo   | Descrição                  |
+|-------|--------|----------------------------|
+| id    | UUID   | Identificador do usuário   |
+| nome  | String | Nome do usuário            |
+| email | String | Email do usuário           |
+| role  | String | Papel/permissão do usuário |
+
+---
+
+#####  GET /usuario/{id}
+Retorna os dados de um usuário específico por ID.
+
+**Path Parameters**:
+
+| Parâmetro | Tipo | Obrigatório | Descrição              |
+|-----------|------|-------------|------------------------|
+| id        | UUID | Sim         | ID do usuário buscado  |
+
+**Response Body**: Sucesso (200 OK)
+```json
+{
+  "id": "uuid",
+  "nome": "string",
+  "email": "string",
+  "role": "string"
+}
+```
+
+| Campo | Tipo   | Descrição                  |
+|-------|--------|----------------------------|
+| id    | UUID   | Identificador do usuário   |
+| nome  | String | Nome do usuário            |
+| email | String | Email do usuário           |
+| role  | String | Papel/permissão do usuário |
+
+---
+
+#####  POST /usuario
+Cadastra um novo usuário no sistema.
+
+**Request Body**:
+```json
+{
+  "nome": "string",
+  "email": "string",
+  "senha": "string",
+  "role": "string"
+}
+```
+
+| Campo | Tipo   | Obrigatório | Descrição                  |
+|-------|--------|-------------|----------------------------|
+| nome  | String | Sim         | Nome do usuário            |
+| email | String | Sim         | Email do usuário           |
+| senha | String | Sim         | Senha do usuário           |
+| role  | String | Sim         | Papel/permissão do usuário |
+
+**Response Body**: Sucesso (201 Created)
+```json
+{
+  "id": "uuid",
+  "nome": "string",
+  "email": "string",
+  "role": "string"
+}
+```
+
+| Campo | Tipo   | Descrição                  |
+|-------|--------|----------------------------|
+| id    | UUID   | Identificador do usuário   |
+| nome  | String | Nome do usuário            |
+| email | String | Email do usuário           |
+| role  | String | Papel/permissão do usuário |
+
+---
+
+#####  PUT /usuario/{id}
+Atualiza os dados de um usuário existente.
+
+**Path Parameters**:
+
+| Parâmetro | Tipo | Obrigatório | Descrição                 |
+|-----------|------|-------------|---------------------------|
+| id        | UUID | Sim         | ID do usuário a atualizar |
+
+**Request Body**:
+```json
+{
+  "nome": "string",
+  "email": "string",
+  "senha": "string",
+  "role": "string"
+}
+```
+
+| Campo | Tipo   | Obrigatório | Descrição                  |
+|-------|--------|-------------|----------------------------|
+| nome  | String | Sim         | Nome do usuário            |
+| email | String | Sim         | Email do usuário           |
+| senha | String | Sim         | Senha do usuário           |
+| role  | String | Sim         | Papel/permissão do usuário |
+
+**Response Body**: Sucesso (200 OK)
+```json
+{
+  "id": "uuid",
+  "nome": "string",
+  "email": "string",
+  "role": "string"
+}
+```
+
+| Campo | Tipo   | Descrição                  |
+|-------|--------|----------------------------|
+| id    | UUID   | Identificador do usuário   |
+| nome  | String | Nome do usuário            |
+| email | String | Email do usuário           |
+| role  | String | Papel/permissão do usuário |
+
+---
+
+#####  DELETE /usuario/{id}
+Remove um usuário do sistema.
+
+**Path Parameters**:
+
+| Parâmetro | Tipo | Obrigatório | Descrição               |
+|-----------|------|-------------|-------------------------|
+| id        | UUID | Sim         | ID do usuário a deletar |
+
+**Response Body**: Sucesso (204 No Content)
 
 ---
 

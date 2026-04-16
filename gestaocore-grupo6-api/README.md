@@ -372,6 +372,122 @@ Remove um cliente do sistema.
 
 ---
 
+<details>
+<summary><h3>ProdutoController</h3></summary>
+
+#####  GET /produto
+Retorna a lista de todos os produtos cadastrados.
+
+**Response Body**: Sucesso (200 OK)
+```json
+[
+  {
+    "id": "uuid",
+    "nome": "string",
+    "categoria": "string",
+    "preco": "double",
+    "qtdEstoque": "double"
+  }
+]
+```
+
+---
+
+#####  GET /produto/{id}
+Retorna os dados de um produto específico por ID.
+
+**Path Parameters**:
+
+| Parâmetro | Tipo | Obrigatório | Descrição             |
+|-----------|------|-------------|-----------------------|
+| id        | UUID | Sim         | ID do produto buscado |
+
+**Response Body**: Sucesso (200 OK)
+```json
+{
+  "id": "uuid",
+  "nome": "string",
+  "categoria": "string",
+  "preco": "double",
+  "qtdEstoque": "double"
+}
+```
+
+---
+
+#####  POST /produto
+Cadastra um novo produto no sistema.
+
+**Request Body**:
+```json
+{
+  "nome": "string",         // obrigatorio
+  "categoria": "string",    // obrigatorio
+  "preco": "double",        // obrigatorio
+  "qtdEstoque": "double"    // obrigatorio
+}
+```
+
+**Response Body**: Sucesso (201 Created)
+```json
+{
+  "id": "uuid",
+  "nome": "string",
+  "categoria": "string",
+  "preco": "double",
+  "qtdEstoque": "double"
+}
+```
+
+---
+
+#####  PUT /produto/{id}
+Atualiza os dados de um produto existente.
+
+**Path Parameters**:
+
+| Parâmetro | Tipo | Obrigatório | Descrição                 |
+|-----------|------|-------------|---------------------------|
+| id        | UUID | Sim         | ID do produto a atualizar |
+
+**Request Body**:
+```json
+{
+  "nome": "string",
+  "categoria": "string",
+  "preco": "double",
+  "qtdEstoque": "double"
+}
+```
+
+**Response Body**: Sucesso (200 OK)
+```json
+{
+  "id": "uuid",
+  "nome": "string",
+  "categoria": "string",
+  "preco": "double",
+  "qtdEstoque": "double"
+}
+```
+
+---
+
+#####  DELETE /produto/{id}
+Remove um produto do sistema.
+
+**Path Parameters**:
+
+| Parâmetro | Tipo | Obrigatório | Descrição               |
+|-----------|------|-------------|-------------------------|
+| id        | UUID | Sim         | ID do produto a deletar |
+
+**Response Body**: Sucesso (204 No Content)
+
+</details>
+
+---
+
 ## Documentação de Referência
 
 Para mais informações, consulte as seguintes documentações:

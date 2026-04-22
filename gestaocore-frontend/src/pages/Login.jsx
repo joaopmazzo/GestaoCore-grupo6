@@ -11,7 +11,7 @@ export default function Login() {
   const onSubmit = async (data) => {
     setError('');
     try {
-      const res = await api.post('/login', { email: data.email, senha: data.senha });
+      const res = await api.post('usuario/login', { email: data.email, senha: data.senha });
       login(res.data.accessToken);
     } catch (err) {
       setError('Email ou senha inválidos. Tente novamente.');

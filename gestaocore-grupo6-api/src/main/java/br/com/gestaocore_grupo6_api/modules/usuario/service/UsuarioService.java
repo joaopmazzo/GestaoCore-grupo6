@@ -1,5 +1,6 @@
 package br.com.gestaocore_grupo6_api.modules.usuario.service;
 
+import br.com.gestaocore_grupo6_api.modules.usuario.dto.AtualizarUsuarioRequestDTO;
 import br.com.gestaocore_grupo6_api.modules.usuario.dto.UsuarioDTO;
 import br.com.gestaocore_grupo6_api.modules.usuario.dto.CriarUsuarioRequestDTO;
 import br.com.gestaocore_grupo6_api.modules.usuario.entity.UsuarioEntity;
@@ -39,7 +40,7 @@ public class UsuarioService {
         return usuarioMapper.toDTO(usuarioRepository.save(usuario));
     }
 
-    public UsuarioDTO atualizarUsuario(UUID id, CriarUsuarioRequestDTO dto) {
+    public UsuarioDTO atualizarUsuario(UUID id, AtualizarUsuarioRequestDTO dto) {
         UsuarioEntity usuarioASerAtualizado = buscarUsuarioPorId(id);
         UsuarioEntity usuarioAtualizado = usuarioMapper.toEntity(dto);
         usuarioAtualizado.setSenha(passwordEncoder.encode(usuarioAtualizado.getSenha()));

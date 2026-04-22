@@ -1,5 +1,6 @@
 package br.com.gestaocore_grupo6_api.modules.usuario.controller;
 
+import br.com.gestaocore_grupo6_api.modules.usuario.dto.AtualizarUsuarioRequestDTO;
 import br.com.gestaocore_grupo6_api.modules.usuario.dto.UsuarioDTO;
 import br.com.gestaocore_grupo6_api.modules.usuario.dto.CriarUsuarioRequestDTO;
 import br.com.gestaocore_grupo6_api.modules.usuario.service.UsuarioService;
@@ -39,7 +40,7 @@ public class UsuarioController {
     }
 
     @PutMapping(value = "/{id}", produces = "application/json")
-    public ResponseEntity<UsuarioDTO> atualizarUsuario(@PathVariable UUID id, @RequestBody @Valid CriarUsuarioRequestDTO dto) {
+    public ResponseEntity<UsuarioDTO> atualizarUsuario(@PathVariable UUID id, @RequestBody @Valid AtualizarUsuarioRequestDTO dto) {
         UsuarioDTO responseDTO = usuarioService.atualizarUsuario(id, dto);
         return ResponseEntity.ok().body(responseDTO);
     }

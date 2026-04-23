@@ -51,11 +51,6 @@ Autentica um usuário e retorna um token JWT.
 }
 ```
 
-| Campo | Tipo   | Obrigatório | Descrição                          |
-|-------|--------|-------------|------------------------------------|
-| email | String | Sim         | Email do usuário para autenticação |
-| senha | String | Sim         | Senha do usuário                   |
-
 **Response Body**: Sucesso (200 OK)
 ```json
 {
@@ -63,10 +58,6 @@ Autentica um usuário e retorna um token JWT.
   "expiresIn": "string"
 }
 ```
-| Campo       | Tipo   | Descrição                                          |
-|-------------|--------|----------------------------------------------------|
-| accessToken | String | Token JWT para autenticação em requisições futuras |
-| expiresIn   | String | Data/hora de expiração do token                    |
 
 </details>
 
@@ -90,13 +81,6 @@ Retorna a lista de todos os usuários cadastrados.
 ]
 ```
 
-| Campo | Tipo   | Descrição                  |
-|-------|--------|----------------------------|
-| id    | UUID   | Identificador do usuário   |
-| nome  | String | Nome do usuário            |
-| email | String | Email do usuário           |
-| role  | String | Papel/permissão do usuário |
-
 ---
 
 #####  GET /usuario/{id}
@@ -118,13 +102,6 @@ Retorna os dados de um usuário específico por ID.
 }
 ```
 
-| Campo | Tipo   | Descrição                  |
-|-------|--------|----------------------------|
-| id    | UUID   | Identificador do usuário   |
-| nome  | String | Nome do usuário            |
-| email | String | Email do usuário           |
-| role  | String | Papel/permissão do usuário |
-
 ---
 
 #####  POST /usuario
@@ -140,13 +117,6 @@ Cadastra um novo usuário no sistema.
 }
 ```
 
-| Campo | Tipo   | Obrigatório | Descrição                  |
-|-------|--------|-------------|----------------------------|
-| nome  | String | Sim         | Nome do usuário            |
-| email | String | Sim         | Email do usuário           |
-| senha | String | Sim         | Senha do usuário           |
-| role  | String | Sim         | Papel/permissão do usuário |
-
 **Response Body**: Sucesso (201 Created)
 ```json
 {
@@ -156,13 +126,6 @@ Cadastra um novo usuário no sistema.
   "role": "string"
 }
 ```
-
-| Campo | Tipo   | Descrição                  |
-|-------|--------|----------------------------|
-| id    | UUID   | Identificador do usuário   |
-| nome  | String | Nome do usuário            |
-| email | String | Email do usuário           |
-| role  | String | Papel/permissão do usuário |
 
 ---
 
@@ -185,13 +148,6 @@ Atualiza os dados de um usuário existente.
 }
 ```
 
-| Campo | Tipo   | Obrigatório | Descrição                  |
-|-------|--------|-------------|----------------------------|
-| nome  | String | Sim         | Nome do usuário            |
-| email | String | Sim         | Email do usuário           |
-| senha | String | Sim         | Senha do usuário           |
-| role  | String | Sim         | Papel/permissão do usuário |
-
 **Response Body**: Sucesso (200 OK)
 ```json
 {
@@ -201,13 +157,6 @@ Atualiza os dados de um usuário existente.
   "role": "string"
 }
 ```
-
-| Campo | Tipo   | Descrição                  |
-|-------|--------|----------------------------|
-| id    | UUID   | Identificador do usuário   |
-| nome  | String | Nome do usuário            |
-| email | String | Email do usuário           |
-| role  | String | Papel/permissão do usuário |
 
 ---
 
@@ -481,6 +430,144 @@ Remove um produto do sistema.
 | Parâmetro | Tipo | Obrigatório | Descrição               |
 |-----------|------|-------------|-------------------------|
 | id        | UUID | Sim         | ID do produto a deletar |
+
+**Response Body**: Sucesso (204 No Content)
+
+</details>
+
+---
+
+<details>
+<summary><h3>VendaController</h3></summary>
+
+#####  GET /venda
+Retorna a lista de todas as vendas cadastradas.
+
+**Response Body**: Sucesso (200 OK)
+```json
+[
+  {
+    "id": "uuid",
+    "dataVenda": "2024-04-23T10:30:00",
+    "clienteId": "uuid",
+    "itens": [
+      {
+        "id": "uuid",
+        "produtoId": "uuid",
+        "quantidade": 2.0,
+        "valorTotal": 100.00,
+        "valorNaVenda": 50.00
+      }
+    ]
+  }
+]
+```
+
+---
+
+#####  GET /venda/{id}
+Retorna os dados de uma venda específica por ID.
+
+**Path Parameters**:
+
+| Parâmetro | Tipo | Obrigatório | Descrição             |
+|-----------|------|-------------|-----------------------|
+| id        | UUID | Sim         | ID da venda buscada   |
+
+**Response Body**: Sucesso (200 OK)
+```json
+{
+  "id": "uuid",
+  "dataVenda": "2024-04-23T10:30:00",
+  "clienteId": "uuid",
+  "itens": [
+    {
+      "id": "uuid",
+      "produtoId": "uuid",
+      "quantidade": 2.0,
+      "valorTotal": 100.00,
+      "valorNaVenda": 50.00
+    }
+  ]
+}
+```
+
+---
+
+#####  POST /venda
+Cadastra uma nova venda no sistema.
+
+**Request Body**:
+```json
+{
+  "dataVenda": "2024-04-23T10:30:00",      // obrigatorio
+  "clienteId": "uuid",                     // obrigatorio
+  "itens": [                               // obrigatorio
+    {
+      "produtoId": "uuid",                 // obrigatorio
+      "quantidade": 2.0                    // obrigatorio
+    }
+  ]
+}
+```
+
+**Response Body**: Sucesso (201 Created)
+```json
+{
+  "id": "uuid",
+  "dataVenda": "2024-04-23T10:30:00",
+  "clienteId": "uuid",
+  "itens": [
+    {
+      "id": "uuid",
+      "produtoId": "uuid",
+      "quantidade": 2.0,
+      "valorTotal": 100.00,
+      "valorNaVenda": 50.00
+    }
+  ]
+}
+```
+
+---
+
+#####  PATCH /venda/{id}/cancelar
+Cancela uma venda existente.
+
+**Path Parameters**:
+
+| Parâmetro | Tipo | Obrigatório | Descrição              |
+|-----------|------|-------------|------------------------|
+| id        | UUID | Sim         | ID da venda a cancelar |
+
+**Response Body**: Sucesso (200 OK)
+```json
+{
+  "id": "uuid",
+  "dataVenda": "2024-04-23T10:30:00",
+  "clienteId": "uuid",
+  "itens": [
+    {
+      "id": "uuid",
+      "produtoId": "uuid",
+      "quantidade": 2.0,
+      "valorTotal": 100.00,
+      "valorNaVenda": 50.00
+    }
+  ]
+}
+```
+
+---
+
+#####  DELETE /venda/{id}
+Remove uma venda do sistema. **(Requer role ADMIN)**
+
+**Path Parameters**:
+
+| Parâmetro | Tipo | Obrigatório | Descrição             |
+|-----------|------|-------------|-----------------------|
+| id        | UUID | Sim         | ID da venda a deletar |
 
 **Response Body**: Sucesso (204 No Content)
 

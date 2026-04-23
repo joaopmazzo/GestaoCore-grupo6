@@ -41,14 +41,13 @@ class ProdutoControllerTest {
     private ProdutoRepository produtoRepository;
 
     private UUID produtoId;
-    private ProdutoEntity produto;
     private AtualizarProdutoRequestDTO atualizarProdutoDTO;
 
     @BeforeEach
     void setUp() {
         produtoRepository.deleteAll();
 
-        produto = produtoRepository.save(ProdutoEntity.builder()
+        ProdutoEntity produto = produtoRepository.save(ProdutoEntity.builder()
                 .nome("Notebook")
                 .categoria("Eletrônicos")
                 .preco(2500.00)

@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard';
 import Clientes from './pages/Clientes';
 import Produtos from './pages/Produtos';
 import Usuarios from './pages/Usuarios';
+import Vendas from './pages/Vendas';
 import './styles/global.css';
 
 function App() {
@@ -37,6 +38,14 @@ function App() {
             element={
               <PrivateRoute>
                 <MainLayout><Produtos /></MainLayout>
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/vendas"
+            element={
+              <PrivateRoute>
+                <MainLayout><Vendas /></MainLayout>
               </PrivateRoute>
             }
           />

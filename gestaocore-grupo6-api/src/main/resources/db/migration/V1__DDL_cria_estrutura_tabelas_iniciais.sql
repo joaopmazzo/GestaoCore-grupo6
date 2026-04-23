@@ -36,7 +36,7 @@ CREATE TABLE produto (
 );
 
 INSERT INTO produto (id, nome, categoria, preco, qtd_estoque) VALUES
-('55555555-5555-5555-5555-555555555555', 'Notebook Dell Inspiron', 'Eletrônicos', 3500.00, 15),
+('55555555-5555-5555-5555-555555555555', 'Notebook Dell Inspiron', 'Eletrônicos', 3500.00, 5),
 ('66666666-6666-6666-6666-666666666666', 'Mouse Logitech MX', 'Periféricos', 250.00, 50),
 ('77777777-7777-7777-7777-777777777777', 'Teclado Mecânico RGB', 'Periféricos', 450.00, 30);
 

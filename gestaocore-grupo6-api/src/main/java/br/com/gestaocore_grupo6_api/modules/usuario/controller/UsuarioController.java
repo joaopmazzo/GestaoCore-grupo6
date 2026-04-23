@@ -7,6 +7,7 @@ import br.com.gestaocore_grupo6_api.modules.usuario.service.UsuarioService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -46,6 +47,7 @@ public class UsuarioController {
     }
 
     @DeleteMapping(value = "/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deletarUsuario(@PathVariable UUID id) {
         usuarioService.deletarUsuario(id);
         return ResponseEntity.noContent().build();

@@ -1,12 +1,14 @@
-package br.com.gestaocore_grupo6_api.entity;
+package br.com.gestaocore_grupo6_api.modules.cliente.entity;
 
 import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Embeddable
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

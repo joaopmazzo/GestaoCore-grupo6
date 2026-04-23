@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: gestaocore-grupo6-api-test
+
+  # H2 Database Configuration for Tests
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+
+  # H2 Console
+  h2:
+    console:
+      enabled: false
+
+  # JPA/Hibernate Configuration for Tests
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: false
+
+  # Flyway Configuration for Tests
+  flyway:
+    enabled: false
+
+  # Security
+  security:
+    user:
+      name: test
+      password: test
+
+jwt:
+  secret: test-secret-key-with-minimum-256-bits-length-for-testing-purposes
+  expiration: 3600000
+
+# Logging
+logging:
+  level:
+    org.springframework: WARN
+    org.hibernate: WARN
+    br.com.gestaocore_grupo6_api: DEBUG

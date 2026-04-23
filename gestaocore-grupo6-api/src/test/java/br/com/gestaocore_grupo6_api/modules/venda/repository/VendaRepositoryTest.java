@@ -3,7 +3,6 @@ package br.com.gestaocore_grupo6_api.modules.venda.repository;
 import br.com.gestaocore_grupo6_api.modules.cliente.entity.ClienteEntity;
 import br.com.gestaocore_grupo6_api.modules.cliente.entity.Endereco;
 import br.com.gestaocore_grupo6_api.modules.cliente.repository.ClienteRepository;
-import br.com.gestaocore_grupo6_api.modules.produto.repository.ProdutoRepository;
 import br.com.gestaocore_grupo6_api.modules.venda.entity.VendaEntity;
 import br.com.gestaocore_grupo6_api.modules.venda.enums.StatusVenda;
 import jakarta.persistence.EntityManager;
@@ -33,9 +32,6 @@ class VendaRepositoryTest {
 
     @Autowired
     private ClienteRepository clienteRepository;
-
-    @Autowired
-    private ProdutoRepository produtoRepository;
 
     @Autowired
     private EntityManager entityManager;

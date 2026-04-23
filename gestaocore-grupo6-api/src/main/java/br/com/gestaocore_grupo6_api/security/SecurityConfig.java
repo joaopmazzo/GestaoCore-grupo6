@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
@@ -43,7 +44,10 @@ public class SecurityConfig {
                             .requestMatchers(PERMIT_ALL_LIST).permitAll()
                             .anyRequest().authenticated()
                 )
-                .exceptionHandling(exception -> exception.accessDeniedHandler(customAccessDeniedHandler()))
+                .exceptionHandling(exception -> exception
+                        .authenticationEntryPoint(customAuthenticationEntryPoint())
+                        .accessDeniedHandler(customAccessDeniedHandler())
+                )
                 .addFilterBefore(authenticationFilter, BasicAuthenticationFilter.class)
                 .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
         ;
@@ -64,8 +68,15 @@ public class SecurityConfig {
     }
 
     @Bean
+    public AuthenticationEntryPoint customAuthenticationEntryPoint() {
+        return (request, response, authException) -> {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        };
+    }
+
+    @Bean
     public AccessDeniedHandler customAccessDeniedHandler() {
-        return (request, response, accessDeniedException) -> response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        return (request, response, accessDeniedException) -> response.setStatus(HttpServletResponse.SC_FORBIDDEN);
     }
 
     @Bean

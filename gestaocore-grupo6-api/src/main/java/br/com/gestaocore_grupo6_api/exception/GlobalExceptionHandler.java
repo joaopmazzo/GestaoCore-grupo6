@@ -3,6 +3,7 @@ package br.com.gestaocore_grupo6_api.exception;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -21,6 +22,17 @@ public class GlobalExceptionHandler {
                 ex.getLocalizedMessage()
         );
         problemDetail.setTitle("Falha na autenticação");
+        problemDetail.setProperty("timestamp", Instant.now());
+        return problemDetail;
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ProblemDetail handleAccessDeniedException(AccessDeniedException ex) {
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(
+                HttpStatus.FORBIDDEN,
+                "Acesso negado"
+        );
+        problemDetail.setTitle("Acesso negado");
         problemDetail.setProperty("timestamp", Instant.now());
         return problemDetail;
     }

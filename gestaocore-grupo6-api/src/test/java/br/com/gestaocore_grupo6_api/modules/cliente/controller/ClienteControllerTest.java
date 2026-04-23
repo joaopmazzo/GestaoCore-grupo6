@@ -42,7 +42,6 @@ class ClienteControllerTest {
     private ClienteRepository clienteRepository;
 
     private UUID clienteId;
-    private ClienteEntity cliente;
     private AtualizarClienteRequestDTO atualizarClienteDTO;
     private Endereco endereco;
 
@@ -59,7 +58,7 @@ class ClienteControllerTest {
                 .complemento("Apto 10")
                 .build();
 
-        cliente = clienteRepository.save(ClienteEntity.builder()
+        ClienteEntity cliente = clienteRepository.save(ClienteEntity.builder()
                 .nome("João da Silva")
                 .email("joao@email.com")
                 .telefone("11999999999")

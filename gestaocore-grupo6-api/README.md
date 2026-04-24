@@ -10,6 +10,128 @@
 
 ---
 
+## Instruções para Rodar Localmente
+
+### Pré-requisitos
+
+Para rodar este projeto, você precisa ter instalado:
+
+#### 1. **Java 21**
+
+**macOS (usando Homebrew)**:
+```bash
+brew install openjdk@21
+# Verificar instalação
+java -version
+```
+
+**Ubuntu/Debian Linux**:
+```bash
+sudo apt update
+sudo apt install openjdk-21-jdk
+# Verificar instalação
+java -version
+```
+
+**Windows**:
+- Baixar o instalador em https://www.oracle.com/java/technologies/downloads/#java21
+- Executar o instalador
+- Adicionar JAVA_HOME às variáveis de ambiente do sistema
+
+#### 2. **Git** (para clonar o repositório)
+
+**macOS**:
+```bash
+brew install git
+```
+
+**Ubuntu/Debian Linux**:
+```bash
+sudo apt install git
+```
+
+**Windows**:
+- Baixar em https://git-scm.com/download/win
+- Executar o instalador
+
+### Passos para Configurar e Rodar
+
+#### 1. Clonar o repositório
+
+```bash
+git clone https://github.com/joaopmazzo/GestaoCore-grupo6.git
+cd gestaocore-grupo6-api
+```
+
+#### 2. Dar permissão ao Gradle Wrapper (somente em Linux/macOS)
+
+```bash
+chmod +x gradlew
+```
+
+#### 3. Compilar o projeto
+
+```bash
+./gradlew clean build
+```
+
+> **Nota**: A primeira execução pode levar alguns minutos, pois o Gradle irá baixar todas as dependências do projeto.
+
+#### 4. Rodar a aplicação
+
+```bash
+./gradlew bootRun
+```
+
+A aplicação estará disponível em: `http://localhost:8080`
+
+#### 5. Rodar os testes
+
+```bash
+./gradlew test
+```
+
+Para gerar relatório de cobertura de testes com JaCoCo:
+
+```bash
+./gradlew jacocoTestReport
+# Relatório será gerado em: build/reports/jacoco/test/html/index.html
+```
+
+### Acessar o Console do H2 (Banco de Dados)
+
+Você pode acessar o console do H2 enquanto o projeto estive em execução em:
+
+```
+http://localhost:8080/h2-console
+```
+
+**Configurações padrão**:
+- **Driver Class**: org.h2.Driver
+- **JDBC URL**: jdbc:h2:mem:testdb
+- **User Name**: sa
+- **Password**: (deixar em branco)
+
+### Troubleshooting
+
+**Problema**: `Command 'java' not found`
+- **Solução**: Verifique se Java 21 está instalado e adicione o JAVA_HOME ao PATH do sistema.
+
+**Problema**: `Permission denied: ./gradlew`
+- **Solução**: Execute `chmod +x gradlew` no terminal.
+
+**Problema**: Build falha com erro de dependências
+- **Solução**: Execute `./gradlew clean` para limpar o cache e depois tente novamente.
+
+**Problema**: Porta 8080 já está em uso
+- **Solução**: Você pode mudar a porta no arquivo `src/main/resources/application.yml`:
+```yaml
+server:
+  port: 8081  # Ou outra porta disponível
+```
+
+---
+
 ## Bibliotecas e Dependências
 
 ### Web

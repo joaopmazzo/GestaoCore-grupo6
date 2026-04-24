@@ -10,28 +10,12 @@ Interface web do sistema de gestão de clientes, produtos e estoque. Desenvolvid
 |------------|--------------|
 | Node.js | 18+ |
 | npm | 9+ |
-| Java (JDK) | 21 |
 
 ---
 
 ## Como rodar
 
-### 1. Backend (API Spring Boot)
-
-```bash
-cd gestaocore-grupo6-api
-./gradlew bootRun
-```
-
-A API sobe em **`http://localhost:8080`**.
-
-Ao iniciar, o Flyway cria as tabelas automaticamente e insere um usuário admin para login inicial.
-
-> **Credenciais padrão:** confirmar com o responsável pelo repositório (senha em BCrypt no migration SQL).
-
----
-
-### 2. Frontend (React)
+### Frontend (React)
 
 Em um **novo terminal**:
 
